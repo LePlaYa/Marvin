@@ -1,7 +1,9 @@
 import discord
-import requests
+import w2g
 
 class MyClient(discord.Client):
+    created_channel = []
+
     async def on_ready(self):
        print('Logged on as {0}' .format(self.user))
 
@@ -9,13 +11,21 @@ class MyClient(discord.Client):
         if(message.content == "Hallo"):
             await message.channel.send('Hi {0}, schön das du da bist!'.format(message.author.mention))
         elif(message.content.split(' ')[0] == "w2g"):
-            payload = {'w2g_api_key': watoge_token.read(), 'share':message.content.split(' ')[1]}
-            r = requests.post('https://w2g.tv/rooms/create.json', data=payload)
-            jsres = r.json()
-            await message.channel.send('https://w2g.tv/rooms/{0}'.format(jsres["streamkey"]))
-            await message.delete()
+            await w2g.create_w2g(self, message, watoge_token)
         elif(message.content == "richtig?"):
             await message.channel.send('falsch')
+
+    async def on_voice_state_update(self, member, before, after):
+        #print("{}:{}:{}".format(member, before, after))
+        if(after.channel):
+            if(after.channel.name == "create-room"):
+                self.created_channel.append(await after.channel.guild.create_voice_channel("{0.name}'s Channel".format(member), category=after.channel.category))
+                await member.move_to(self.created_channel[-1])
+
+        for channel in self.created_channel:
+            if(not len(channel.members)):
+                await channel.delete()
+                self.created_channel.remove(channel)
 
 
 client = MyClient()
