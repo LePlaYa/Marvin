@@ -14,6 +14,7 @@ class MyClient(discord.Client):
             r = requests.post('https://w2g.tv/rooms/create.json', data=payload)
             jsres = r.json()
             await message.channel.send('https://w2g.tv/rooms/{0}'.format(jsres["streamkey"]))
+            await message.delete()
         elif(message.content == "richtig?"):
             await message.channel.send('falsch')
 
