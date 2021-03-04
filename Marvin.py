@@ -7,7 +7,7 @@ class MyClient(discord.Client):
 
     async def on_message(self, message):
         if(message.content == "Hallo"):
-            await message.channel.send('Hi @{0}, schön das du da bist!'.format(message.author.mention()))
+            await message.channel.send('Hi {0}, schön das du da bist!'.format(message.author.mention))
         elif(message.content.split(' ')[0] == "w2g"):
             payload = {'w2g_api_key': watoge_token.read(), 'share':message.content.split(' ')[1]}
             r = requests.post('https://w2g.tv/rooms/create.json', data=payload)
