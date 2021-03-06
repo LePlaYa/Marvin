@@ -16,7 +16,8 @@ languages = {
     "kotlin"    : 817676030394761236,
     "java"      : 817676073960996896,
     "graphql"   : 817682434526281769,
-    "kubernetes": 817682751690899466
+    "kubernetes": 817682751690899466,
+    "ruby"      : 817722351260401714
 }
 
 async def set_languages(self, payload):
