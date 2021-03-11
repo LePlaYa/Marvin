@@ -1,14 +1,17 @@
+import os.path
 import discord
+import sqlite3
 import w2g
 import temporary_channel
 import help
 import programming_languages
+#import create_channel
 intents = discord.Intents.default()
 intents.members = True
 
 
 class MyClient(discord.Client):
-    created_channel = []
+    created_channel = {}
 
     async def on_ready(self):
        print('Logged on as {0}' .format(self.user))
@@ -18,6 +21,8 @@ class MyClient(discord.Client):
             await help.helper(self, message)
         elif(message.content.split(' ')[0] == "w2g"):
             await w2g.create_w2g(self, message, watoge_token)
+#        elif(message.content.split(' ')[0] == "!create"):
+#            await create.create_channel(self.message)
 
     async def on_voice_state_update(self, member, before, after):
         await temporary_channel.temporary_channel(self, member, before, after)
