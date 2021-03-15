@@ -17,7 +17,8 @@ languages = {
     "java"      : 817676073960996896,
     "graphql"   : 817682434526281769,
     "kubernetes": 817682751690899466,
-    "ruby"      : 817722351260401714
+    "ruby"      : 817722351260401714,
+    "dart"      : 821117356599148544
 }
 
 async def set_languages(self, payload):
