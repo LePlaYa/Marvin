@@ -20,7 +20,10 @@ languages = {
     "ruby"      : 817722351260401714,
     "dart"      : 821117356599148544,
     "typescript": 947903361397694494,
-    "swift"     : 962274085046485032,  
+    "swift"     : 962274085046485032
+}
+
+languages_two = {
     "delphi"    : 1007973815944495165
 }
 
@@ -28,9 +31,17 @@ async def set_languages(self, payload):
     if(payload.message_id == 817684497424318486):
         if(languages.get(payload.emoji.name)):
             await payload.member.add_roles(payload.member.guild.get_role(languages.get(payload.emoji.name)))
+    if(payload.message_id == 1007982534610649149):
+        if(languages_two.get(payload.emoji.name)):
+            await payload.member.add_roles(payload.member.guild.get_role(languages_two.get(payload.emoji.name)))
 
 async def remove_languages(self, payload, guild):
     if(payload.message_id == 817684497424318486):
         if(languages.get(payload.emoji.name)):
             mem = await guild.fetch_member(payload.user_id)
             await mem.remove_roles(guild.get_role(languages.get(payload.emoji.name)))
+    if(payload.message_id == 1007982534610649149):
+        if(languages_two.get(payload.emoji.name)):
+            mem = await guild.fetch_member(payload.user_id)
+            await mem.remove_roles(guild.get_role(languages_two.get(payload.emoji.name)))
+
