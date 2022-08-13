@@ -1,3 +1,4 @@
+import os
 import os.path
 import discord
 import sqlite3
@@ -37,9 +38,10 @@ class MyClient(discord.Client):
 
 
 
-
-client = MyClient(intents=intents)
-f = open("token", "r")
-watoge_token = open("w2g_token", "r")
-wtoken = watoge_token.read()
-client.run(f.read())
+if __name__ == "__main__":
+    client = MyClient(intents=intents)
+    #f = open("token", "r")
+    #watoge_token = open("w2g_token", "r")
+    print(os.environ['WATCH_TOGETHER_TOKEN'])
+    wtoken = os.environ['WATCH_TOGETHER_TOKEN'] #watoge_token.read()
+    client.run(os.environ['DISCORD_TOKEN'])
