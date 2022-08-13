@@ -20,7 +20,7 @@ languages = {
     "ruby"      : 817722351260401714,
     "dart"      : 821117356599148544,
     "typescript": 947903361397694494,
-    "swift"     : 962274085046485032
+    "swift"     : 962274085046485032   
 }
 
 async def set_languages(self, payload):
